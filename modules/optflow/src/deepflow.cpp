@@ -50,7 +50,7 @@ namespace optflow
 class OpticalFlowDeepFlow: public DenseOpticalFlow
 {
 public:
-    OpticalFlowDeepFlow();
+    OpticalFlowDeepFlow(float usigma=.6f, int ufpi=5, float ualpha=1.f, float udelta=.5f, float ugamma=5.f);
 
     void calc( InputArray I0, InputArray I1, InputOutputArray flow );
     void collectGarbage();
@@ -74,17 +74,17 @@ private:
 
 };
 
-OpticalFlowDeepFlow::OpticalFlowDeepFlow()
+OpticalFlowDeepFlow::OpticalFlowDeepFlow(float usigma, int ufpi, float ualpha, float udelta, float ugamma)
 {
     // parameters
-    sigma = 0.6f;
+    sigma = usigma;//0.6f;
     minSize = 25;
     downscaleFactor = 0.95f;
-    fixedPointIterations = 5;
+    fixedPointIterations = ufpi;//5;
     sorIterations = 25;
-    alpha = 1.0f;
-    delta = 0.5f;
-    gamma = 5.0f;
+    alpha = ualpha;// 1.0f;
+    delta = udelta;// 0.5f;
+    gamma = ugamma;// 5.0f;
     omega = 1.6f;
 
     //consts
@@ -170,7 +170,7 @@ void OpticalFlowDeepFlow::calc( InputArray _I0, InputArray _I1, InputOutputArray
 
 void OpticalFlowDeepFlow::collectGarbage() {}
 
-Ptr<DenseOpticalFlow> createOptFlow_DeepFlow() { return makePtr<OpticalFlowDeepFlow>(); }
+Ptr<DenseOpticalFlow> createOptFlow_DeepFlow(float sigma, int fpi, float alpha, float delta, float gamma) { return makePtr<OpticalFlowDeepFlow>(sigma,fpi,alpha,delta,gamma); }
 
 }//optflow
 }//cv

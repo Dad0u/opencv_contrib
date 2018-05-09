@@ -241,7 +241,7 @@ Iterations of Succesive Over-Relaxation (solver)
 -   member float omega
 Relaxation factor in SOR
  */
-CV_EXPORTS_W Ptr<DenseOpticalFlow> createOptFlow_DeepFlow();
+CV_EXPORTS_W Ptr<DenseOpticalFlow> createOptFlow_DeepFlow(float usigma=.6f, int ufpi=5, float ualpha=1.f, float udelta=.5f, float ugamma=5.f);
 
 //! Additional interface to the SimpleFlow algorithm - calcOpticalFlowSF()
 CV_EXPORTS_W Ptr<DenseOpticalFlow> createOptFlow_SimpleFlow();
